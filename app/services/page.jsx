@@ -8,28 +8,28 @@ const services = [
     num: "01",
     title: "Web Development",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Develop pixel perfect front-ends and back-ends with latest technologies.",
     href: "",
   },
   {
     num: "02",
-    title: "UI/UX Design",
+    title: "Mobile Development",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Develop pixel perfect cross-platform mobile applications with latest technologies.",
     href: "",
   },
   {
     num: "03",
-    title: "Logo Design",
+    title: "Cloud - AWS",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Develop applications on top of AWS cloud services to scale your business.",
     href: "",
   },
   {
     num: "04",
     title: "SEO",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Optimize your website to rank higher in search engines and drive more traffic.",
     href: "",
   },
 ];
