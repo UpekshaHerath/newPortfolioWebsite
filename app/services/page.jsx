@@ -31,7 +31,7 @@ const services = [
     description:
       "Optimize your website to rank higher in search engines and drive more traffic.",
     href: "",
-  },
+  }
 ];
 
 import { motion } from "framer-motion";
