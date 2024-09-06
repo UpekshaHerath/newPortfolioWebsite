@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/select";
 
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import emailjs from '@emailjs/browser';
 
 const info = [
   {
@@ -37,6 +39,35 @@ const info = [
 import { motion } from "framer-motion";
 
 const Contact = () => {
+  const form = useRef();
+
+  const [emailData, setEmailData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    subject: ''
+  })
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    console.log(emailData);
+
+    console.log(form);
+
+    emailjs.sendForm('service_rh243gm', 'template_tznj8q5', form.current, {
+      publicKey: 'R5bUziqMip7IBJDuk',
+    })
+    .then(
+      () => {
+        console.log('Email sent successfully!');
+      }, 
+      (error) => {
+        console.log('Email sent failed...', error.text);
+      },
+    );
+  }
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -48,47 +79,51 @@ const Contact = () => {
     >
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
-          {/* form */}
+          
           <div className="xl:w-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+
+            <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+
               <h3 className="text-4xl text-accent">Let's work together</h3>
-              <p className="text-white/60">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum
-                nihil sapiente pariatur id totam.
-              </p>
-              {/* input */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input type="firstname" placeholder="Firstname" />
-                <Input type="lastname" placeholder="Lastname" />
-                <Input type="email" placeholder="Email address" />
-                <Input type="phone" placeholder="Phone number" />
-              </div>
-              {/* select */}
-              <Select>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a service" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select a service</SelectLabel>
-                    <SelectItem value="est">Web Development</SelectItem>
-                    <SelectItem value="cst">UI/UX Design</SelectItem>
-                    <SelectItem value="mst">Logo Design</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              {/* textarea */}
-              <Textarea
-                className="h-[200px]"
-                placeholder="Type your message here."
-              />
-              {/* btn */}
-              <Button size="md" className="max-w-40">
-                Send message
-              </Button>
+                <p className="text-white/60">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum
+                  nihil sapiente pariatur id totam.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Input type="firstname" placeholder="Firstname" name="firstName" />
+                  <Input type="lastname" placeholder="Lastname" name="lastName" />
+                  <Input type="email" placeholder="Email address" name="email" />
+                  <Input type="phone" placeholder="Phone number" name="phoneNumber" />
+                </div>
+                
+                <Select>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a service" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Select a service</SelectLabel>
+                      <SelectItem value="est">Web Development</SelectItem>
+                      <SelectItem value="cst">UI/UX Design</SelectItem>
+                      <SelectItem value="mst">Logo Design</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                
+                <Textarea
+                  className="h-[200px]"
+                  placeholder="Type your message here."
+                />
+                
+                <Button size="md" className="max-w-40">
+                  Send message
+                </Button>
+
             </form>
+
           </div>
-          {/* info */}
+          
           <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
             <ul className="flex flex-col gap-10">
               {info.map((item, index) => {
